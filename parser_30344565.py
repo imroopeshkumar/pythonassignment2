@@ -1,4 +1,3 @@
-
 class Parser:
 	"""docstring for ClassName"""
 	def __init__(self, inputString):
