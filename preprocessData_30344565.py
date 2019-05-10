@@ -1,8 +1,15 @@
+import re
+
 def preprocessLine(inputLine):
 	#preprocess the data in each line
 	#write your code here
 	pass
 
+
+def cleanhtml(raw_html):
+  cleanr = re.compile('<.*?>')
+  cleantext = re.sub(cleanr, '', raw_html)
+  return cleantext
 
 
 def splitFile(inputFile, outputFile_question, outputFile_answer):
@@ -20,16 +27,21 @@ def splitFile(inputFile, outputFile_question, outputFile_answer):
 		for var in rows_without_header:
 			# print(var)
 			temp = var.replace('&amp;', '&').replace('&quot;', '"').replace('&apos;', '\'').replace('&gt;','>').replace('&lt;','<').replace('&#xA;', ' ').replace('&#xAD', ' ')
-			temp2 = temp.replace('<p>','').replace('<h3>', '').replace('<div>', '').replace('</p>','').replace('</h3>', '').replace('</div>', '')
+			# temp2 = temp.replace('<p>','').replace('<h3>', '').replace('<div>', '').replace('</p>','').replace('</h3>', '').replace('</div>', '')
 			# var.replace('&lt;', '<')
 			# print(temp)
+			temp2 = cleanhtml(temp)
+			print(temp2)
 			filtered_rows.append(temp2)
-		with open('draftfile.txt', 'w+') as x:
-			print(filtered_rows)
-			for y in filtered_rows:
-				x.write(y)
+		# with open('draftfile.txt', 'w+') as x:
+		# 	print(filtered_rows)
+		# 	for y in filtered_rows:
+		# 		x.write(y)
+		# print(filtered_rows)
 
 	pass
+
+
 
 
 
