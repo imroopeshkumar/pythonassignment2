@@ -39,9 +39,9 @@ def splitFile(inputFile, outputFile_question, outputFile_answer):
                 # print(var)
                 postidtype = var.split('PostTypeId="')[1].split('"')[0]
                 rowid = var.split('Id="')[1].split('"')[0]
-                creationDate = var.split('CreationDate="')[4].split('"')[0]
+                creationDate = var.split('CreationDate="')[1].split('"')[0]
                 # creationDate = 0
-                print(postidtype)
+                # print(postidtype)
                 temp = var.replace('&amp;', '&').replace('&quot;', '"').replace('&apos;', '\'').replace('&gt;',
                                                                                                         '>').replace('&lt;',
                                                                                                                      '<').replace(
@@ -60,10 +60,24 @@ def splitFile(inputFile, outputFile_question, outputFile_answer):
                 continue;
 
         with open('draftfile.txt', 'w+', encoding="utf-8") as x:
-            print(filtered_rows)
+            # print(filtered_rows)
             for y in filtered_rows:
                 x.write(y)
         # print(filtered_rows)
+
+    print('done')
+    x = 1
+    for var in postObjects:
+        x += 1
+        print('pass:' + str(x))
+        if (int(var.postTypeId) == 1):
+            with open('draftquestions.txt', 'a', encoding='utf-8') as question_file:
+                question_file.write(var.Body)
+            with open('draftanswers.txt', 'a', encoding='utf-8') as question_file:
+                question_file.write(var.Body)
+        else:
+            pass
+
 
     pass
 
