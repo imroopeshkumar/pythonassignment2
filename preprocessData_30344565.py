@@ -70,10 +70,10 @@ def splitFile(inputFile, outputFile_question, outputFile_answer):
         x += 1
         print('pass:' + str(x))
         if (int(var.postTypeId) == 1):
-            with open('draftquestions.txt', 'a', encoding='utf-8') as question_file:
+            with open(outputFile_question, 'a', encoding='utf-8') as question_file:
                 question_file.write(var.Body)
         elif(int(var.postTypeId) == 2):
-            with open('draftanswers.txt', 'a', encoding='utf-8') as question_file:
+            with open(outputFile_answer, 'a', encoding='utf-8') as answer_file:
                 question_file.write(var.Body)
         else:
             pass
