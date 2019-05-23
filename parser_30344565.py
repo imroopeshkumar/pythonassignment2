@@ -87,11 +87,11 @@ class Parser:
 # to check if function is working
 x = r'<row Id="2481" PostTypeId="1" CreationDate="2016-04-07T18:11:33.793" Body="&lt;p&gt;In $200 price range, should I be looking at cards from AMD or Nvidia?&lt;/p&gt;&#xA;” />'
 y = Parser(x)
-# print('done')
+print('done')
 # print(y.getVocabularySize())
 # print(y.getID())
 # print(y.getPostType())
 # print(y.getDateQuarter())
 # print(y.getCleanedBody())
 #
-# print(y)
+print(y)

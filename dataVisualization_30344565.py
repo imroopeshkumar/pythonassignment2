@@ -99,7 +99,7 @@ def visualizePostNumberTrend(inputFile, outputImage):
         leg = plt.legend(framealpha=1, frameon=True)
         plt.savefig(outputImage)
 
-# main function 
+# main function
 if __name__ == "__main__":
     f_data = "data.xml"
     f_wordDistribution = "wordNumberDistribution.png"
