@@ -3,13 +3,13 @@ import parser_30344565 as PS
 import matplotlib.pyplot as plt
 import numpy as np
 
-
+# plot graph to visualize word distribution
 def visualizeWordDistribution(inputFile, outputImage):
     # write your code here
     with open(inputFile, 'r', encoding='utf-8') as f:
         rows_with_header = f.readlines()
         rows_without_header = rows_with_header[1:5447]
-        vocsizeindicator = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        vocsizeindicator = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] # initialize array to count vocabulary size for each interval
         for var in rows_without_header:
             try:
                 parser = PS.Parser(var)
@@ -34,9 +34,9 @@ def visualizeWordDistribution(inputFile, outputImage):
     plt.title('Vocabulary size distribution')
     plt.xlabel('Vocabulary Size')
 
-    plt.savefig('vocabularySizeDistribution.png')
+    plt.savefig(outputImage)
 
-
+# visualize number of questions and answers over the quarters
 def visualizePostNumberTrend(inputFile, outputImage):
     # write your code here
     q1a = 0
@@ -87,23 +87,23 @@ def visualizePostNumberTrend(inputFile, outputImage):
 
         qs = [q1q,q2q,q3q,q4q]
         ans = [q1a,q2a,q3a,q4a]
-        x = [1,2,3,4]
-        y_pos = np.arange(5)
+        x = [0,1,2,3]
+        y_pos = np.arange(len(qs))
 
         plt.clf()
-        plt.plot(x, qs, color = 'red')
-        plt.plot(x, ans, color = 'blue')
+        questions = plt.plot(x, qs, color = 'red', label = 'Questions')
+        answers = plt.plot(x, ans, color = 'blue', label = 'Answers')
         # plt.xticks(y_pos, ['Q1', 'Q2', 'Q3', 'Q4'])
-        plt.xticks(np.arrange[3],['Q1', 'Q2', 'Q3', 'Q4'])
+        plt.xticks(y_pos,['Q1', 'Q2', 'Q3', 'Q4'])
         plt.xlabel('Year Quarters')
-        # plt.plot(x, )
-        plt.savefig('postNumberTrend.png')
+        leg = plt.legend(framealpha=1, frameon=True)
+        plt.savefig(outputImage)
 
-
+# main function 
 if __name__ == "__main__":
     f_data = "data.xml"
     f_wordDistribution = "wordNumberDistribution.png"
     f_postTrend = "postNumberTrend.png"
 
-    # visualizeWordDistribution(f_data, f_wordDistribution)
+    visualizeWordDistribution(f_data, f_wordDistribution)
     visualizePostNumberTrend(f_data, f_postTrend)

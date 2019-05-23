@@ -1,5 +1,7 @@
 import re
 
+
+# class to hold variables after processing line to make task 2 easy
 class postVariables:
     def __init__(self, postTypeId, creationDate, rowId, Body):
         self.postTypeId = postTypeId
@@ -7,36 +9,31 @@ class postVariables:
         self.rowId = rowId
         self.Body = Body
 
+#pre process line and remove only clean body using regex
 def preprocessLine(inputLine):
     # preprocess the data in each line
     # write your code here
-    cleanre = re.compile('<.*?>')
+    cleanre = re.compile('<.*?>') #regex to remove all html tags
     processedLine = re.sub(cleanre, '', inputLine)
     return processedLine
-    pass
 
-
+# substitute given substitutions and extract data to make task2 easy
 def lineSubber(var):
     postidtype = var.split('PostTypeId="')[1].split('"')[0]
     rowid = var.split('Id="')[1].split('"')[0]
     creationDate = var.split('CreationDate="')[1].split('"')[0]
-    # creationDate = 0
-    # print(postidtype)
+
     temp = var.replace('&amp;', '&').replace('&quot;', '"').replace('&apos;', '\'').replace('&gt;',
                                                                                             '>').replace('&lt;',
                                                                                                          '<').replace(
         '&#xA;', ' ').replace('&#xAD', ' ')
-    # temp2 = temp.replace('<p>','').replace('<h3>', '').replace('<div>', '').replace('</p>','').replace('</h3>', '').replace('</div>', '')
-    # var.replace('&lt;', '<')
-    # print(temp)
+
     temp2 = preprocessLine(temp)
     temp2 = temp2.replace('/>', '').replace('"', '')
-    # print(temp2)
     post = postVariables(postidtype, creationDate, rowid, temp2)
-    # filtered_rows.append(temp2)
-    # postObjects.append(post)
     return post;
 
+# split file into two files question and answer
 def splitFile(inputFile, outputFile_question, outputFile_answer):
     # preprocess the original file, and split them preprocessLineinto two files.
     # please call preprocessLine() function within this function
@@ -58,13 +55,6 @@ def splitFile(inputFile, outputFile_question, outputFile_answer):
                 print(e)
                 continue;
 
-        # with open('draftfile.txt', 'w+', encoding="utf-8") as x:
-        #     # print(filtered_rows)
-        #     for var in filtered_rows:
-        #         x.write(y)
-        # print(filtered_rows)
-
-    print('done')
     x = 1
     for var in listofposts:
         x += 1
@@ -74,14 +64,12 @@ def splitFile(inputFile, outputFile_question, outputFile_answer):
                 question_file.write(var.Body)
         elif(int(var.postTypeId) == 2):
             with open(outputFile_answer, 'a', encoding='utf-8') as answer_file:
-                question_file.write(var.Body)
+                answer_file.write(var.Body)
         else:
             pass
 
 
-    pass
-
-
+#main function
 if __name__ == "__main__":
     f_data = "data.xml"
     f_question = "question.txt"
